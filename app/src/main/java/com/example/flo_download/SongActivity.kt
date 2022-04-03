@@ -3,6 +3,8 @@ package com.example.flo_download
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.SeekBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo_download.databinding.ActivitySongBinding
 
@@ -14,6 +16,7 @@ class SongActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.songNuguBtnDownIv.setOnClickListener {
             finish()
         }
@@ -52,6 +55,26 @@ class SongActivity : AppCompatActivity() {
             binding.songTitleTv.text=intent.getStringExtra("title")
             binding.songSingerTv.text=intent.getStringExtra("singer")
         }
+
+        val time : TextView = findViewById(R.id.song_end_tv)
+        val seekBar : SeekBar = findViewById(R.id.song_playbar_sb)
+        var min = 0
+        var sec = 0
+        var text = ""
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                min = progress/60
+                sec = progress%60
+                text = "${min.toString()}:${sec.toString()}"
+                time.text = text
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+        })
 
     }
 

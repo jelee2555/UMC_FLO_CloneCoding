@@ -7,9 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.flo_download.databinding.FragmentAlbumBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class AlbumFragment : Fragment() {
     lateinit var binding: FragmentAlbumBinding
+
+    private val information = arrayListOf("수록곡", "상세정보", "영상")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,29 +33,13 @@ class AlbumFragment : Fragment() {
             setPlayerLike(false)
         }
 
-        binding.albumMyTasteOffIv.setOnClickListener {
-            setTasteMix(true)
-        }
+        val albumAdapter = AlbumVPAdapter(this)
+        binding.albumContentVp.adapter = albumAdapter
 
-        binding.albumMyTasteOnIv.setOnClickListener {
-            setTasteMix(false)
-        }
-
-        binding.songLalacLayout.setOnClickListener {
-            Toast.makeText(activity, "LILAC", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.songFluLayout.setOnClickListener {
-            Toast.makeText(activity, "Flu", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.songCoinLayout.setOnClickListener {
-            Toast.makeText(activity,"Coin", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.songSpringLayout.setOnClickListener {
-            Toast.makeText(activity, "봄 안녕 봄", Toast.LENGTH_SHORT).show()
-        }
+        TabLayoutMediator(binding.albumContentTb, binding.albumContentVp){
+            tab, position ->
+            tab.text = information[position]
+        }.attach()
 
         return binding.root
 
@@ -64,17 +52,6 @@ class AlbumFragment : Fragment() {
         else{
             binding.albumBtnLikeOffIv.visibility=View.VISIBLE
             binding.albumBtnLikeOnIv.visibility=View.GONE
-        }
-    }
-
-    fun setTasteMix(tasteMix : Boolean){
-        if(tasteMix){
-            binding.albumMyTasteOffIv.visibility = View.GONE
-            binding.albumMyTasteOnIv.visibility = View.VISIBLE
-        }
-        else{
-            binding.albumMyTasteOffIv.visibility = View.VISIBLE
-            binding.albumMyTasteOnIv.visibility = View.GONE
         }
     }
 }
