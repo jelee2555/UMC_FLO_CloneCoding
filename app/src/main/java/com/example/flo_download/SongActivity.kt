@@ -1,6 +1,7 @@
 package com.example.flo_download
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.SeekBar
@@ -11,11 +12,17 @@ import com.example.flo_download.databinding.ActivitySongBinding
 class SongActivity : AppCompatActivity() {
 
     lateinit var binding : ActivitySongBinding
+    lateinit var song : Song
+    lateinit var  timer : Timer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        initSong()
+        setPlayer(song)
 
         binding.songNuguBtnDownIv.setOnClickListener {
             finish()
@@ -50,35 +57,80 @@ class SongActivity : AppCompatActivity() {
         binding.songUnlikeOnIv.setOnClickListener {
             setUnlikeStatus(true)
         }
-
-        if(intent.hasExtra("title") && intent.hasExtra("singer")){
-            binding.songTitleTv.text=intent.getStringExtra("title")
-            binding.songSingerTv.text=intent.getStringExtra("singer")
-        }
-
-        val time : TextView = findViewById(R.id.song_end_tv)
-        val seekBar : SeekBar = findViewById(R.id.song_playbar_sb)
-        var min = 0
-        var sec = 0
-        var text = ""
-        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                min = progress/60
-                sec = progress%60
-                text = "${min.toString()}:${sec.toString()}"
-                time.text = text
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
-        })
-
     }
 
-    fun setPlayerStatus(isPlaying : Boolean){
+    override fun onDestroy() {
+        super.onDestroy()
+        timer.interrupt()
+    }
+
+    private fun initSong(){
+        if (intent.hasExtra("title") && intent.hasExtra("singer")){
+            song = Song(
+                intent.getStringExtra("title")!!,
+                intent.getStringExtra("singer")!!,
+                intent.getIntExtra("second", 0),
+                intent.getIntExtra("playtime", 0),
+                intent.getBooleanExtra("isPlaying", false)
+            )
+        }
+        startTimer()
+    }
+
+    private fun setPlayer(song: Song){
+        binding.songTitleTv.text=intent.getStringExtra("title")
+        binding.songSingerTv.text=intent.getStringExtra("singer")
+        binding.songStartTv.text= String.format("%02d:%02d", song.second / 60, song.second %60)
+        binding.songEndTv.text= String.format("%02d:%02d", song.playtime / 60, song.playtime %60)
+        binding.songPlaybarSb.progress = (song.second * 1000 / song.playtime)
+
+        setPlayerStatus(song.isPlaying)
+    }
+
+    private fun startTimer(){
+        timer = Timer(song.playtime, song.isPlaying)
+        timer.start()
+    }
+    inner class Timer(private val playtime : Int, var isPlaying: Boolean = true) : Thread(){
+
+        private var second : Int = 0
+        private var mills : Float = 0f
+
+        override fun run() {
+            super.run()
+            try {
+                while (true){
+                    if(second >= playtime){
+                        break
+                    }
+
+                    if (isPlaying){
+                        sleep(50)
+                        mills += 50
+
+                        runOnUiThread{
+                            binding.songPlaybarSb.progress = ((mills / playtime) * 100).toInt()
+                        }
+                        if (mills % 1000 == 0f){
+                            runOnUiThread {
+                                binding.songStartTv.text = String.format("%02d:%02d", second / 60, second % 60)
+                            }
+                            second++
+                        }
+                    }
+                }
+
+            }catch (e: InterruptedException){
+                Log.d("Song", "쓰레드가 죽었습니다. ${e.message}")
+            }
+
+        }
+    }
+
+    private fun setPlayerStatus(isPlaying : Boolean){
+        song.isPlaying = isPlaying
+        timer.isPlaying = isPlaying
+
         if (isPlaying){
             binding.songNuguBtnPlayIv.visibility = View.VISIBLE
             binding.songNuguBtnPauseIv.visibility = View.GONE
