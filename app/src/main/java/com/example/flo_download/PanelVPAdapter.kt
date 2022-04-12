@@ -5,14 +5,16 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 
 class PanelVPAdapter (fragment: Fragment) : FragmentStateAdapter(fragment){
-    override fun getItemCount(): Int = 3
 
-    override fun createFragment(position: Int): Fragment {
-        return when(position){
-            0 -> Panel1Fragment()
-            1 -> Panel2Fragment()
-            else -> Panel3Fragment()
-        }
+    private val fragmentlist : ArrayList<Fragment> = ArrayList()
+
+    override fun getItemCount(): Int = fragmentlist.size
+
+    override fun createFragment(position: Int): Fragment = fragmentlist[position]
+
+    fun addFragment(fragment: Fragment){
+        fragmentlist.add(fragment)
+        notifyItemInserted(fragmentlist.size - 1)
     }
 
 }
