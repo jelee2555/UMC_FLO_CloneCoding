@@ -15,7 +15,7 @@
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_banner.xml" value="0.2914529914529915" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_detail.xml" value="0.2914529914529915" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_file.xml" value="0.29157759726378796" />
-        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_locker.xml" value="0.22" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_look.xml" value="0.20923913043478262" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_panel.xml" value="0.29157759726378796" />
@@ -26,6 +26,9 @@
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_search.xml" value="0.35520833333333335" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_song.xml" value="0.2914529914529915" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_video.xml" value="0.22" />
+        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/item_album.xml" value="0.29157759726378796" />
+        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/item_layout.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/item_saved.xml" value="0.29157759726378796" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/selected_dot.xml" value="0.29157759726378796" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20185185185185187" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/udemy_android_template_bottomnavi-main/app/src/main/res/layout/fragment_search.xml" value="0.19739583333333333" />

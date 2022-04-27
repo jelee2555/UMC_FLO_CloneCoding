@@ -1,9 +1,11 @@
 package com.example.flo_download
 
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.flo_download.databinding.ActivityMainBinding
 import com.google.gson.Gson
 
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private var song: Song = Song()
     private var gson: Gson = Gson()
+    private var mediaPlayer : MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,14 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("isPlaying", song.isPlaying)
             intent.putExtra("music", song.music)
             startActivity(intent)
+        }
+
+        //플레이 버튼 바인딩
+        binding.mainMiniplayerBtn.setOnClickListener {
+            setPlayerStatus(true)
+        }
+        binding.mainPauseBtn.setOnClickListener {
+            setPlayerStatus(false)
         }
 
         initBottomNavigation()
@@ -81,6 +92,7 @@ class MainActivity : AppCompatActivity() {
         binding.mainMiniplayerSingerTv.text = song.singer
         binding.mainPlaybarSb.progress = (song.second*100000)/song.playtime
     }
+
     override fun onStart() {
         super.onStart()
         val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
@@ -93,5 +105,19 @@ class MainActivity : AppCompatActivity() {
             gson.fromJson(songJson, Song::class.java)
         }
         setMiniPlayer(song)
+    }
+
+
+    //플레이 버튼 상태
+    private fun setPlayerStatus(isPlaying : Boolean) {
+        song.isPlaying = isPlaying
+
+        if (isPlaying) {
+            binding.mainMiniplayerBtn.visibility = View.GONE
+            binding.mainPauseBtn.visibility = View.VISIBLE
+        } else {
+            binding.mainMiniplayerBtn.visibility = View.VISIBLE
+            binding.mainPauseBtn.visibility = View.GONE
+        }
     }
 }

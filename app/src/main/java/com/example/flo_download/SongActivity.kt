@@ -32,10 +32,10 @@ class SongActivity : AppCompatActivity() {
             finish()
         }
         binding.songNuguBtnPlayIv.setOnClickListener {
-            setPlayerStatus(false)
+            setPlayerStatus(true)
         }
         binding.songNuguBtnPauseIv.setOnClickListener {
-            setPlayerStatus(true)
+            setPlayerStatus(false)
         }
 
         binding.songNuguBtnRepeatUnactiveIv.setOnClickListener {
@@ -79,7 +79,7 @@ class SongActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         timer.interrupt()
-        mediaPlayer?.release()  //미디어 플레이어가 갖고 있떤 리소스 해제
+        mediaPlayer?.release()  //미디어 플레이어가 갖고 있던 리소스 해제
         mediaPlayer = null  //미디어 플레이어 해제
     }
 
@@ -153,13 +153,13 @@ class SongActivity : AppCompatActivity() {
         timer.isPlaying = isPlaying
 
         if (isPlaying){
-            binding.songNuguBtnPlayIv.visibility = View.VISIBLE
-            binding.songNuguBtnPauseIv.visibility = View.GONE
+            binding.songNuguBtnPlayIv.visibility = View.GONE
+            binding.songNuguBtnPauseIv.visibility = View.VISIBLE
             mediaPlayer?.start()
         }
         else{
-            binding.songNuguBtnPlayIv.visibility = View.GONE
-            binding.songNuguBtnPauseIv.visibility = View.VISIBLE
+            binding.songNuguBtnPlayIv.visibility = View.VISIBLE
+            binding.songNuguBtnPauseIv.visibility = View.GONE
             if(mediaPlayer?.isPlaying == true){
                 mediaPlayer?.pause()
             }
