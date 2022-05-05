@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
     private var song: Song = Song()
-    private var gson: Gson = Gson()
-    private var mediaPlayer : MediaPlayer? = null
+//    private var gson: Gson = Gson()
+//    private var mediaPlayer : MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,15 +24,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        inputDummySongs()
+
         binding.mainPlayerCl.setOnClickListener{
-            //startActivity(Intent(this, SongActivity :: class.java))
+            val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
+            editor.putInt("songId", song.id)
+            editor.apply()
+
             val intent = Intent(this, SongActivity::class.java)
-            intent.putExtra("title", song.title)
-            intent.putExtra("singer", song.singer)
-            intent.putExtra("second", song.second)
-            intent.putExtra("playtime", song.playtime)
-            intent.putExtra("isPlaying", song.isPlaying)
-            intent.putExtra("music", song.music)
             startActivity(intent)
         }
 
@@ -95,15 +94,27 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
-        val songJson = sharedPreferences.getString("songData", null)
+//        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+//        val songJson = sharedPreferences.getString("songData", null)
+//
+//        song = if(songJson == null){
+//            Song("라일락", "아이유", 0, 60, false, "music_lilac")
+//        }
+//        else{
+//            gson.fromJson(songJson, Song::class.java)
+//        }
+        val spf = getSharedPreferences("song", MODE_PRIVATE)
+        val songId = spf.getInt("songId", 0)
 
-        song = if(songJson == null){
-            Song("라일락", "아이유", 0, 60, false, "music_lilac")
+        val songDB = SongDatabase.getInstance(this)!!
+
+        song = if (songId == 0){
+            songDB.songDao().getSong(1)
+        }else{
+            songDB.songDao().getSong(songId)
         }
-        else{
-            gson.fromJson(songJson, Song::class.java)
-        }
+
+        Log.d("song ID", song.id.toString())
         setMiniPlayer(song)
     }
 
@@ -119,5 +130,80 @@ class MainActivity : AppCompatActivity() {
             binding.mainMiniplayerBtn.visibility = View.VISIBLE
             binding.mainPauseBtn.visibility = View.GONE
         }
+    }
+
+    private fun inputDummySongs(){
+        val songDB = SongDatabase.getInstance(this)!!
+        val songs = songDB.songDao().getSongs()
+
+        if (songs.isNotEmpty()) return
+
+        songDB.songDao().insert(
+            Song(
+                "ASAP",
+                "STAYC",
+                0,
+                240,
+                false,
+                "music_asap",
+                R.drawable.asap,
+                false
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                "밤편지",
+                "아이유 (IU)",
+                0,
+                240,
+                false,
+                "music_bam",
+                R.drawable.bam,
+                false
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                "Butter",
+                "방탄소년단",
+                0,
+                240,
+                false,
+                "music_butter",
+                R.drawable.img_album_exp,
+                false
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                "라일락",
+                "아이유 (IU)",
+                0,
+                240,
+                false,
+                "music_lilac",
+                R.drawable.img_album_exp2,
+                false
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                "신호등",
+                "이무진",
+                0,
+                240,
+                false,
+                "music_sinho",
+                R.drawable.sinho,
+                false
+            )
+        )
+
+        val _songs = songDB.songDao().getSongs()
+        Log.d("DB data", _songs.toString())
     }
 }
