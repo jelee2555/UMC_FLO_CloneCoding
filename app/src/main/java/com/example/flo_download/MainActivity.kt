@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         inputDummySongs()
+        inputDummyAlbums()
 
         binding.mainPlayerCl.setOnClickListener{
             val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
@@ -44,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         initBottomNavigation()
+
+        Log.d("MAIN/JWT_TO_SERVER", getJwt().toString())
 
     }
 
@@ -90,6 +93,12 @@ class MainActivity : AppCompatActivity() {
         binding.mainMiniplayerTitleTv.text = song.title
         binding.mainMiniplayerSingerTv.text = song.singer
         binding.mainPlaybarSb.progress = (song.second*100000)/song.playtime
+    }
+
+    private fun getJwt():String?{
+        val spf = this?.getSharedPreferences("auth2", AppCompatActivity.MODE_PRIVATE)
+
+        return spf!!.getString("jwt", "")
     }
 
     override fun onStart() {
@@ -200,6 +209,51 @@ class MainActivity : AppCompatActivity() {
                 "music_sinho",
                 R.drawable.sinho,
                 false
+            )
+        )
+
+        val _songs = songDB.songDao().getSongs()
+        Log.d("DB data", _songs.toString())
+    }
+
+    private fun inputDummyAlbums(){
+        val songDB = SongDatabase.getInstance(this)!!
+        val albums = songDB.songDao().getSongs()
+
+        if (albums.isNotEmpty()) return
+
+        songDB.albumDao().insert(
+            Album(
+                0,
+                "IU 5th Album 'LILAC'", "아이유(IU)", R.drawable.img_album_exp2
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                1,
+                "Butter", "방탄소년단 (BTS)", R.drawable.img_album_exp
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                2,
+                "ASAP", "스테이씨", R.drawable.asap
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                3,
+                "밤편지", "아이유(IU)", R.drawable.bam
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                4,
+                "DunDunDance", "오마이걸", R.drawable.dundun
             )
         )
 

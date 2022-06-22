@@ -30,6 +30,8 @@ class HomeFragment : Fragment() {
     var currentPage: Int = 0
 
 
+    private lateinit var songDB : SongDatabase
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,15 +41,8 @@ class HomeFragment : Fragment() {
 
 
         //데이터 리스트 생성 더미 데이터
-        albumData.apply {
-            add(Album("Butter", "방탄소년단 (BTS)", R.drawable.img_album_exp))
-            add(Album("Lilac", "아이유 (IU)", R.drawable.img_album_exp2))
-            add(Album("ASAP", "스테이씨 (STAYC)", R.drawable.asap))
-            add(Album("밤편지", "아이유 (IU)", R.drawable.bam))
-            add(Album("저 별", "헤이즈 (Heiez)", R.drawable.heize))
-            add(Album("신호등", "이무진", R.drawable.sinho))
-        }
-
+        songDB = SongDatabase.getInstance(requireContext())!!
+        albumData.addAll(songDB.albumDao().getAlbum())
         val albumRVAdapter = AlbumRVAdapter(albumData)
         binding.homeTodayMusicAlbumRv.adapter = albumRVAdapter
         binding.homeTodayMusicAlbumRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

@@ -5,10 +5,16 @@
       <map>
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/drawable-v24/white_indicator.xml" value="0.1" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/drawable/btm_color_selector.xml" value="0.31" />
+        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/drawable/button_background_flo_color.xml" value="0.196" />
+        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/drawable/fragment_look_chart_background.xml" value="0.199" />
+        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/drawable/fragment_look_chip_off_background.xml" value="0.2015" />
+        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/drawable/fragment_look_chip_on_background.xml" value="0.2015" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/drawable/purple_indicator.xml" value="0.1" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/drawable/shape_circle_selected.xml" value="0.161" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/drawable/splash.xml" value="0.141" />
+        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/activity_login.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/activity_main.xml" value="0.35520833333333335" />
+        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/activity_signup.xml" value="0.29157759726378796" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/activity_song.xml" value="0.20555555555555555" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/activity_splash.xml" value="0.29157759726378796" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_album.xml" value="0.22" />
@@ -23,11 +29,13 @@
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_panel2.xml" value="0.29157759726378796" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_panel3.xml" value="0.29157759726378796" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_saved.xml" value="0.29157759726378796" />
+        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_savedalbum.xml" value="0.29157759726378796" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_search.xml" value="0.35520833333333335" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_song.xml" value="0.2914529914529915" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/fragment_video.xml" value="0.22" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/item_album.xml" value="0.29157759726378796" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/item_layout.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/item_locker_album.xml" value="0.29157759726378796" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/item_saved.xml" value="0.29157759726378796" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/layout/selected_dot.xml" value="0.29157759726378796" />
         <entry key="..\:/Users/jieun/AndroidStudioProjects/FLO_download/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20185185185185187" />
